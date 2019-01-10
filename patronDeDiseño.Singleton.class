@@ -1,0 +1,62 @@
+//https://www.arquitecturajava.com/ejemplo-de-java-singleton-patrones-classloaders/
+
+//SOLO INSTANCIO EL SINGLETON SI NO FUE CREADO ANTES
+
+public class Configurador {
+ 
+ private String url;
+ private String baseDatos;
+ 
+ // 2) Variable estatica privada que almacene una referencia al objeto que vamos a crear a traves del constructor
+ private static final Configurador miconfigurador; 
+ 
+ // 3) Método estático publico que se encarga de instanciar el objeto la primera vez y almacenarlo en la variable estática.
+ public  static Configurador getConfigurador(String url,String baseDatos) {
+ 
+  if (miconfigurador==null) {
+ 
+   miconfigurador=new Configurador(url,baseDatos);
+   }
+   return miconfigurador;
+   }
+
+   // 1) SU CONSTRUCTOR DEBE SER PRIVADO (De esa forma ningún programa será capaz de construir objetos de esta tipo )
+   private Configurador(String url,String baseDatos){
+
+   this.url=url;
+   this.baseDatos=baseDatos;
+
+ }
+ 
+public String getUrl() {
+ return url;
+ }
+ 
+public void setUrl(String url) {
+ this.url = url;
+ }
+ 
+public String getBaseDatos() {
+ return baseDatos;
+ }
+ 
+public void setBaseDatos(String baseDatos) {
+ this.baseDatos = baseDatos;
+ }
+}
+
+
+
+public class Principal {
+ 
+  public static void main(String[] args) {
+
+   Configurador c= Configurador.getConfigurador("miurl", "mibaseDatos");
+
+   System.out.println(c.getUrl());
+
+   System.out.println(c.getBaseDatos());
+
+  }
+ 
+}
